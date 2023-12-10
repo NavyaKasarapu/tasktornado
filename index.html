@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tornado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .desktop-1,
+        .desktop-1 * {
+            box-sizing: border-box;
+        }
+
+        .desktop-1 {
+            background: #d79595;
+            width: 100%;
+            height: 1024px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rectangle-2 {
+            background: #d79595;
+            width: 1440px;
+            height: 77px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        .frame-1 {
+            width: 711px;
+            height: 493px;
+            position: absolute;
+            left: 33px;
+            top: 276px;
+        }
+
+        @keyframes scaleAnimation {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .ellipse-1 {
+        background: #721d5f;
+        border-radius: 50%;
+        width: 506px;
+        height: 493px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        animation: scaleAnimation 3s infinite;
+        }
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.task-tracking-application {
+    color: #f5f5f5;
+    text-align: left;
+    font: 800 48px "Inter", sans-serif;
+    position: absolute;
+    left: 367px;
+    top: 147px;
+    width: 344px;
+    height: 166px;
+    animation: fadeInOut 3s infinite;
+}
+
+        .login-form {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-right: 50px;
+            padding-left: 50px;
+            padding-bottom: 30px;
+            background-color: rgba(245, 245, 245, 0.63);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+        }
+
+        .login-form:hover {
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            font-weight:normal;
+            font-size: small;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #ae2891;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #721d5f;
+        }
+
+
+        .maintain-track-of-all-your-tasks-with-ease {
+        color: #f3eeee;
+        text-align: center;
+        font: 700 32px "Inter", sans-serif;
+        position: relative;
+        width: 351px;
+        height: 103px;
+        left: 950px;
+        top: 650px;
+        transition: color 0.3s ease;
+        }
+
+        .maintain-track-of-all-your-tasks-with-ease:hover {
+        color: #721d5f;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="desktop-1">
+        <div class="rectangle-2"></div>
+        <div class="frame-1">
+            <div class="ellipse-1"></div>
+            <div class="task-tracking-application">TASK TORNADO</div>
+        </div>
+        <div class="maintain-track-of-all-your-tasks-with-ease">
+            A note making and reminder 
+        </div>
+    </div>
+    <div class="login-form">
+        <h2>Login</h2>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <input type="button" value="Login" onclick="validateLogin()">
+        </form>
+    </div>
+    
+
+
+    <script>
+        function validateLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var allowedUsers = {
+                "navya@gmail.com": "priya.07",
+                "kasarapu@gmail.com": "priya.07"
+            };
+
+            if (allowedUsers.hasOwnProperty(username) && allowedUsers[username] === password) {
+                alert("Login successful!");
+                window.location.href = "home.html";
+            } else {
+                alert("Login failed. Please check your credentials.");
+            }
+        }
+    </script>
+</body>
+</html>

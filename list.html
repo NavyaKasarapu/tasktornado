@@ -1,0 +1,181 @@
+: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your existing meta tags and styles here -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tornado - Task List</title>
+    <style>
+        /* Your CSS styles for list.html go here */
+        .desktop-4, .desktop-4 * {
+            box-sizing: border-box;
+        }
+.desktop-4 {
+            background: #d79595;
+            width: 100%; /* Set to 100% width */
+            height: 1024px; /* Set to 100% viewport height */
+            position: relative;
+            overflow:visible;
+        }
+
+.rectangle-17 {
+            background: #df8888;
+            width: 100%;
+            height: 77px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+.task-tracking-application {
+  color: #000000;
+  text-align: center;
+  font: 800 36px "Inter";
+  position: absolute;
+  left: 441px;
+  top: 15px;
+  width: 578px;
+  height: 80px;
+}
+.task-list-overview-stay-organized-and-on-track {
+  color: #f5f5f5;
+  text-align: left;
+  font: 700 70px "Inria Serif", sans-serif;
+  position: absolute;
+  left: 800px;
+  top: 312px;
+  width: 577px;
+  height: 399px;
+}
+.rectangle-172 {
+  background: rgba(245, 245, 245, 0.63);
+  border-radius: 35px;
+  width: 703px;
+  height: 769px;
+  position: absolute;
+  left: 85px;
+  top: 161px;
+}
+
+
+.group-5 {
+  position: absolute;
+  inset: 0;
+}
+
+
+.rectangle-18 {
+  background: #d9d9d9;
+  width: 41px;
+  height: 39px;
+  position: absolute;
+  left: 110px;
+  top: 318px;
+}
+.rectangle-19 {
+  background: #d9d9d9;
+  width: 41px;
+  height: 42px;
+  position: absolute;
+  left: 110px;
+  top: 333px;
+}
+.task-checkbox {
+    margin-right: 10px;
+    width: 25px;
+    height: 50px;
+}
+
+
+.task-rectangle {
+    background: rgba(232, 117, 117, 0.63);
+    border-radius: 10px;
+    margin: 10px; /* Adjust margin as needed */
+    padding: 10px;
+}
+.start-button {
+  background-color: #721D5F; /* Background color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding around the text */
+  border: none; /* Remove the default button border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.start-button:hover {
+  background-color: #877979; /* Change background color on hover */
+}
+
+    </style>
+</head>
+<body>
+<div style="width: 100%; height: 100%; position: relative; background: #D79595">
+    <div class="desktop-4">
+    <div style="width: 1440px; height: 1024px; position: relative; background: #D79595">
+        <div class="desktop-4">
+            <div class="task-tracking-application">TASK TORNADO</div>
+            <div class="task-list-overview-stay-organized-and-on-track">
+                Task List Overview: Stay Organized and On Track
+            </div>
+            <div class="rectangle-172"></div>
+            <div class="group-5">
+                <!-- Add a "Start" button for each task -->
+                <div id="task-display" class="rectangle-17" style="width: 703px; height: 769px; left: 85px; top: 161px; position: absolute; background: rgba(245, 245, 245, 0.63); border-radius: 35px;"></div>
+            </div>
+                    </div>
+</div>
+
+<script>
+
+var tasks = localStorage.getItem("tasks");
+tasks = tasks ? JSON.parse(tasks) : [];
+
+var taskDisplay = document.getElementById("task-display");
+
+if (tasks.length === 0) {
+    taskDisplay.innerHTML = "<p>No tasks created yet.</p>";
+} else {
+    tasks.forEach(function(task, index) {
+        var taskElement = document.createElement("div");
+        taskElement.classList.add("task-rectangle");
+
+        taskElement.innerHTML = `
+        <label class="task-checkbox">
+            <input type="checkbox" id="task-checkbox-${index}" onclick="confirmComplete(${index})">
+        </label>
+        <label for="task-checkbox-${index}" style="font-weight: bold; font-size: 22px; color: #333;">${task.title}</label>
+        <p>Deadline: ${task.deadline}</p>
+        <p>Priority: ${task.priority}</p>
+        <p>Collaboration: ${task.collaboration}</p>
+        <button class="finish-button" onclick="finishTask(${index})">Finish</button>
+        `;
+
+        taskDisplay.appendChild(taskElement);
+    });
+}
+
+
+function finishTask(index) {
+    var taskToMove = tasks[index];
+    var inprogress = localStorage.getItem("inprogress");
+    inprogress = inprogress ? JSON.parse(inprogress) : [];
+    inprogress.push(taskToMove);
+    localStorage.setItem("inprogress", JSON.stringify(inprogress));
+    tasks.splice(index, 1);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    location.reload();
+}
+function confirmComplete(index) {
+    if (confirm("Are you sure you want to mark this task as completed and delete it?")) {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        location.reload();
+    }
+}
+
+</script>
+</body>
+</html>
+
+
